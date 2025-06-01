@@ -1,0 +1,29 @@
+class NestedIterator {
+public:
+    queue<int> q;
+
+    NestedIterator(vector<NestedInteger> &nestedList) {
+        dfs(nestedList);
+    }
+
+    void dfs(vector<NestedInteger> nestedList) {
+        
+            for(auto it : nestedList) {
+                if(it.isInteger()) {
+                    q.push(it.getInteger());
+                } else {
+                    dfs(it.getList());
+                }
+            }
+    }
+    
+    int next() {
+        int x = q.front();
+        q.pop();
+        return x;   
+    }
+    
+    bool hasNext() {
+        return !q.empty();
+    }
+};
